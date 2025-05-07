@@ -1,20 +1,17 @@
+import { useContext } from "react";
 import "./Cart.css";
 import ProductItemInCart from "./ProductItemInCart";
+import { AppContext } from "../../App";
 
-function Cart({ addedToCart, setAddedToCart , addedProducts , setAddedProducts }) {
+function Cart() {
+
+  const {addedToCart, addedProducts} = useContext(AppContext)
   return (
     <div className="cartContainer">
       {addedToCart > 0 ? (
         <>
           {addedProducts.map(product => (
-            <ProductItemInCart
-            key={product.id} 
-            {...product}
-            addedProducts={addedProducts}
-            setAddedProducts={setAddedProducts} 
-            addedToCart={addedToCart} 
-            setAddedToCart={setAddedToCart} 
-          />
+            <ProductItemInCart key={product.id} {...product} />
           ))}
         </>
       ) : (
