@@ -1,18 +1,13 @@
 import "./ProductItem.css";
 import productsList from "../../db";
+import { useContext } from "react";
+import { AppContext } from "../../App";
 
-function ProductItem({
-  id,
-  name,
-  price,
-  image,
-  addedToCart,
-  setAddedToCart,
-  addedProducts,
-  setAddedProducts,
-}) {
+function ProductItem({id ,name ,price ,image}) {
+
+  const {addedToCart, setAddedToCart, addedProducts, setAddedProducts} = useContext(AppContext)
+
   const addToCartHandler = () => {
-
     if(isProductExistInCart()){
       const updateAddedProducts = [...addedProducts]
       updateAddedProducts.map(product => {
