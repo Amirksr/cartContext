@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import "./Cart.css";
 import ProductItemInCart from "./ProductItemInCart";
-import { AppContext } from "../../App";
+import { AppContext } from "../../context/AppContext";
 
 function Cart() {
 
-  const {addedToCart, addedProducts} = useContext(AppContext)
+  const {addedToCart , addedProducts} = useContext(AppContext)
   return (
     <div className="cartContainer">
       {addedToCart > 0 ? (
         <>
-          {addedProducts.map(product => (
+          {addedProducts.map((product) => (
             <ProductItemInCart key={product.id} {...product} />
           ))}
         </>

@@ -1,37 +1,37 @@
 import "./ProductItem.css";
 import productsList from "../../db";
 import { useContext } from "react";
-import { AppContext } from "../../App";
+import { AppContext } from "../../context/AppContext";
 
-function ProductItem({id ,name ,price ,image}) {
 
-  const {addedToCart, setAddedToCart, addedProducts, setAddedProducts} = useContext(AppContext)
+function ProductItem({ id, name, price, image }) {
+
+
+  const {addedToCart , setAddedToCart , addedProducts , setAddedProducts} = useContext(AppContext)
 
   const addToCartHandler = () => {
-    if(isProductExistInCart()){
-      const updateAddedProducts = [...addedProducts]
-      updateAddedProducts.map(product => {
-        if(product.id == id){
-          product.count += 1
-          product.totalPrice = product.count * product.price
+    if (isProductExistInCart()) {
+      const updateAddedProducts = [...addedProducts];
+      updateAddedProducts.map((product) => {
+        if (product.id == id) {
+          product.count += 1;
+          product.totalPrice = product.count * product.price;
         }
-        setAddedProducts(updateAddedProducts)
-        return
-      })
-
-    }else{
+        setAddedProducts(updateAddedProducts);
+        return;
+      });
+    } else {
       setAddedToCart(addedToCart + 1);
       const product = productsList.find((product) => product.id == id);
       product.count = 1;
       product.totalPrice = product.price * product.count;
-      setAddedProducts( prevState => [...prevState , product ]);
+      setAddedProducts((prevState) => [...prevState, product]);
     }
   };
 
-
   const isProductExistInCart = () => {
-    return addedProducts.some(product => product.id == id)
-  }
+    return addedProducts.some((product) => product.id == id);
+  };
 
   return (
     <div className="productCard">
@@ -50,4 +50,3 @@ function ProductItem({id ,name ,price ,image}) {
 }
 
 export default ProductItem;
-
